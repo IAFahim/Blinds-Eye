@@ -396,7 +396,7 @@ MonoBehaviour:
   uiController: {fileID: 865765610}
   boundingBoxVisualizer: {fileID: 1068618347}
   screenRenderer: {fileID: 173077368}
-  targetDim: 224
+  targetDim: 384
   useComputeShaders: 0
   useAsyncGPUReadback: 0
   confidenceThreshold: 0.5
@@ -444,10 +444,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2445d199f944d11ab709b858639ebfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 5022602860645237092, guid: d008f3b3525cf2342af07b2fef204efb, type: 3}
+  model: {fileID: 5022602860645237092, guid: f00b3e712f6415c419dd7f8d31d1d5a3, type: 3}
   useNCHW: 1
   workerType: 32768
-  colormapFile: {fileID: 4900000, guid: 9aea15fc68d2b934093d1d27b1ee4958, type: 3}
+  colormapFile: {fileID: 4900000, guid: 5cb27fcd431046e42bf360c9c70a3041, type: 3}
   pixelShaderUnloadInterval: 100
 --- !u!1 &519420028
 GameObject:
