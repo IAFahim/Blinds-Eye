@@ -1,8 +1,6 @@
-using System.Linq;
 using UnityEngine;
 using CJM.BBox2DToolkit;
 using CJM.DeepLearningImageProcessor;
-using System.Collections.Generic;
 using CJM.BarracudaInference.YOLOX;
 
 public class InferenceController : MonoBehaviour
@@ -74,6 +72,11 @@ public class InferenceController : MonoBehaviour
 
         // Update bounding boxes and user interface
         UpdateBoundingBoxes(inputDims);
+        //print bboxInfoArray data
+        foreach (BBox2DInfo bboxInfo in bboxInfoArray)
+        {
+            Debug.Log($"x: {bboxInfo.bbox.x0}, y: {bboxInfo.bbox.y0}, width: {bboxInfo.bbox.width}, height: {bboxInfo.bbox.height} name:{bboxInfo.label}");
+        }
         uiController.UpdateUI(bboxInfoArray.Length);
         boundingBoxVisualizer.UpdateBoundingBoxVisualizations(bboxInfoArray);
     }

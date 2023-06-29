@@ -21,6 +21,8 @@ public class WebCam : MonoBehaviour
     private void Start()
     {
         SetUpCam();
+        WebCamDevice[] devices = WebCamTexture.devices;
+        Debug.Log($"devices: {devices.Length}");
         RefetchButton.onClick.AddListener(SetUpCam);
         flip.onClick.AddListener(flipIt);
     }
@@ -45,6 +47,20 @@ public class WebCam : MonoBehaviour
                 Debug.Log($"x: {width.value} y: {(int)height.value}");
                 break;
             }
+        }
+
+
+        if (devices.Length > 0)
+        {
+            _cameraTexture = new WebCamTexture(devices[0].name, (int)width.value, (int)height.value, 30);
+            Debug.Log($"x: {width.value} y: {(int)height.value}");
+        }
+
+        if (_cameraTexture == null)
+        {
+            text.text = "No Camera Detected";
+            Debug.Log("No Camera Detected");
+            return;
         }
 
         _isCamAvaible = true;
@@ -73,18 +89,19 @@ public class WebCam : MonoBehaviour
         float ratio = 1;
         if (flipped)
         {
-             ratio = (float)_cameraTexture.width / (float)_cameraTexture.height;
+            ratio = (float)_cameraTexture.width / (float)_cameraTexture.height;
         }
         else
         {
-             ratio = (float)_cameraTexture.height / (float)_cameraTexture.width;
+            ratio = (float)_cameraTexture.height / (float)_cameraTexture.width;
         }
 
         // aspectRatioFitter.aspectRatio = ratio;
 
         // int orientation = _cameraTexture.videoRotationAngle;
         text.text =
-        $"width: {_cameraTexture.width} height: {_cameraTexture.height} orientation: {_cameraTexture.videoRotationAngle}";
+            $"width: {_cameraTexture.width} height: {_cameraTexture.height} orientation: {_cameraTexture.videoRotationAngle}";
+
         // orientation = (int)(orientation * oriantation.value);
         // rawImageBackground.rectTransform.localEulerAngles = new Vector3(0, 0, orientation);
     }

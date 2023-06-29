@@ -8,7 +8,6 @@ public class UIController : MonoBehaviour
     [Header("UI Components")]
     [SerializeField] private TextMeshProUGUI objectsDetectedText;
     [SerializeField] private TextMeshProUGUI fpsText;
-    [SerializeField] private Slider confidenceThresholdSlider;
 
     [Header("Settings")]
     [SerializeField, Tooltip("On-screen text color")]
