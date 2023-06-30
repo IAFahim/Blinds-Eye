@@ -36,14 +36,15 @@ public class ARCompass : MonoBehaviour
         // compensate camera pose
         rawVector = _mainCamera.transform.rotation * rawVector;
 
-        // projection onto xz plane
-        var xzProjection =
-            new Vector3(rawVector.x, 0, rawVector.z);
-
-        var trueHeading = Quaternion.Euler(0, declination, 0) * xzProjection.normalized;
-
+        // while phone is held landscape, the compass is rotated 90 degrees clockwise
+        // compensate for that
+        rawVector = Quaternion.AngleAxis(90, Vector3.up) * rawVector;
+        
+        // calculate rotation
+        var rotation = Quaternion.Euler(0, Input.compass.trueHeading, 0);
+        
         // update global rotation
-        TrueHeadingRotation =
-            Quaternion.FromToRotation(Vector3.forward, trueHeading);
+        TrueHeadingRotation = rotation;
+        
     }
 }
