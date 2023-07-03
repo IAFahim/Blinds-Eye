@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beac06c25a804f9eb67688225f08dd94, type: 3}
+  m_Name: OtherObject
+  m_EditorClassIdentifier: 
+  labelClipList:
+    items:
+    - label: degree
+      clip: {fileID: 8300000, guid: 0ba73373417dea7408e05eb89d31ec1b, type: 3}
+    - label: left
+      clip: {fileID: 8300000, guid: aa00ea6c2fad4cd47949c1eed1c119e9, type: 3}
+    - label: on
+      clip: {fileID: 8300000, guid: a44522d151a84ea449b7c8a827e052eb, type: 3}
+    - label: right
+      clip: {fileID: 8300000, guid: b655f14c026d3c141a78ff893a5951f6, type: 3}
+  folderPath: Audio/other

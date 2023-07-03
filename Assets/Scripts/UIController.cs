@@ -10,8 +10,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI fpsText;
 
     [Header("Settings")]
-    [SerializeField, Tooltip("On-screen text color")]
-    private Color textColor = Color.black;
+    
     [SerializeField, Tooltip("Option to display number of objects detected")]
     public bool displayObjectCount = true;
     [SerializeField, Tooltip("Option to display fps")]
@@ -40,8 +39,7 @@ public class UIController : MonoBehaviour
         if (displayObjectCount)
         {
             objectsDetectedText.gameObject.SetActive(true);
-            objectsDetectedText.text = $"Objects Detected: {objectCount}";
-            objectsDetectedText.color = textColor;
+            objectsDetectedText.text = $"Count: {objectCount}";
         }
         else
         {
@@ -58,7 +56,6 @@ public class UIController : MonoBehaviour
         {
             int fps = (int)(1f / Time.unscaledDeltaTime);
             fpsText.text = $"FPS: {fps}";
-            fpsText.color = textColor;
 
             fpsTimer = Time.unscaledTime + fpsRefreshRate;
         }

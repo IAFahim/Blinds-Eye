@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c44e98b816e4654aa9e293c223f0898, type: 3}
+  m_Name: LabelsObject
+  m_EditorClassIdentifier: 
+  labelClipList:
+    items:
+    - label: person
+      clip: {fileID: 8300000, guid: 138299f3d1fa206429e575c07e9df5b3, type: 3}
+    - label: bicycle
+      clip: {fileID: 8300000, guid: b3c719899c4ad8e428c2cfaf0b59d080, type: 3}
+    - label: car
+      clip: {fileID: 8300000, guid: 6f1d22c0d8f5a1f4199d945f507e86c2, type: 3}
+    - label: motorcycle
+      clip: {fileID: 8300000, guid: bf0234bd80d0cfa479b578c5cd30e230, type: 3}
+    - label: airplane
+      clip: {fileID: 8300000, guid: 3211b7b3a756b894caa5f6a19b5265eb, type: 3}
+    - label: bus
+      clip: {fileID: 8300000, guid: b7b0a5400f131e54286066a0febba24b, type: 3}
+    - label: train
+      clip: {fileID: 8300000, guid: db15a07f119b39a4885eeef9fa8cd290, type: 3}
+    - label: truck
+      clip: {fileID: 8300000, guid: b38cb936abfac634dbbd42e5b3f5f2ee, type: 3}
+    - label: boat
+      clip: {fileID: 8300000, guid: 36ca9c3097fda734280ca554b852889f, type: 3}
+    - label: traffic light
+      clip: {fileID: 8300000, guid: 4c71c8ff530acbb448de3f6ffe960d8d, type: 3}
+    - label: fire hydrant
+      clip: {fileID: 8300000, guid: a78044a32c20e804281cad64aa78f833, type: 3}
+    - label: stop sign
+      clip: {fileID: 8300000, guid: e67711c12361a6a478fb82e09a829484, type: 3}
+    - label: parking meter
+      clip: {fileID: 8300000, guid: d50cb57b90aedde4387b4f083436d0ef, type: 3}
+    - label: bench
+      clip: {fileID: 8300000, guid: 9c644e1dba1feba4abce15cda8ec0dbd, type: 3}
+    - label: bird
+      clip: {fileID: 8300000, guid: 7387645c18a734b4180d37410c40f86c, type: 3}
+    - label: cat
+      clip: {fileID: 8300000, guid: 335f35b331df3774f81140349d904ff8, type: 3}
+    - label: dog
+      clip: {fileID: 8300000, guid: e2b0466d9b9edce41abefe8cb885c3ea, type: 3}
+    - label: horse
+      clip: {fileID: 8300000, guid: c4b0a6cb1d7be124cbb70d6454741491, type: 3}
+    - label: sheep
+      clip: {fileID: 8300000, guid: d4fe0c572cd33684796bfb1436dd79d2, type: 3}
+    - label: cow
+      clip: {fileID: 8300000, guid: c57a398f7823c4f4caf484854e6eba3e, type: 3}
+    - label: elephant
+      clip: {fileID: 8300000, guid: 8b568cf56f03b4b4cbc9174cf2052a9f, type: 3}
+    - label: bear
+      clip: {fileID: 8300000, guid: 1cdd56967a03fc249a13f0c8740373eb, type: 3}
+    - label: zebra
+      clip: {fileID: 8300000, guid: 5fe3660c6452a40498563d0422ee0e91, type: 3}
+    - label: giraffe
+      clip: {fileID: 8300000, guid: 34e14add60e976041bcc92891cb37f74, type: 3}
+    - label: backpack
+      clip: {fileID: 8300000, guid: adf340e5d3d42874dab7c1c0db5b74aa, type: 3}
+    - label: umbrella
+      clip: {fileID: 8300000, guid: 53d77cbe6caaf5c47809273a6979f515, type: 3}
+    - label: handbag
+      clip: {fileID: 8300000, guid: e90f7df5a320cbb44afbab553f13b720, type: 3}
+    - label: tie
+      clip: {fileID: 8300000, guid: 6edb194a553513a43a0f64bcde1b2ad4, type: 3}
+    - label: suitcase
+      clip: {fileID: 8300000, guid: f7e01ad32429f0947ab10efb19bfa397, type: 3}
+    - label: frisbee
+      clip: {fileID: 8300000, guid: 11fafb984bf7bc14a9c816ef01e6f7e8, type: 3}
+    - label: skis
+      clip: {fileID: 8300000, guid: e62d3115255345641b2777544587e221, type: 3}
+    - label: snowboard
+      clip: {fileID: 8300000, guid: 65a197711a924a741affaf18dee0bc58, type: 3}
+    - label: sports ball
+      clip: {fileID: 8300000, guid: 7e2e932634577b84199b5647e2c90c40, type: 3}
+    - label: kite
+      clip: {fileID: 8300000, guid: 8f50deb524dcc4d4885331664d5a47ef, type: 3}
+    - label: baseball bat
+      clip: {fileID: 8300000, guid: 74b89d9f8b36c184a8dc5b2385d6be52, type: 3}
+    - label: baseball glove
+      clip: {fileID: 8300000, guid: 4eaaf659228ec7341b9f0d28c8a140c4, type: 3}
+    - label: skateboard
+      clip: {fileID: 8300000, guid: 3649aa06e6749be4b887fd138d1694a7, type: 3}
+    - label: surfboard
+      clip: {fileID: 8300000, guid: 64d81973ba8812742aea63e8d0ed2b9a, type: 3}
+    - label: tennis racket
+      clip: {fileID: 8300000, guid: a55fabe38d7929549abd84f543ab2559, type: 3}
+    - label: bottle
+      clip: {fileID: 8300000, guid: 0b94c79554ea50e4f9db2e6a10e3d18c, type: 3}
+    - label: wine glass
+      clip: {fileID: 8300000, guid: c247ad06c3eb73749ab06c92ce0440e1, type: 3}
+    - label: cup
+      clip: {fileID: 8300000, guid: bfe66c0b9b515dd49a7e80d8014de1b0, type: 3}
+    - label: fork
+      clip: {fileID: 8300000, guid: 6a7a497fdbec2d14b928df3797f60f00, type: 3}
+    - label: knife
+      clip: {fileID: 8300000, guid: 16df054a700d51045b6d29eeddf70355, type: 3}
+    - label: spoon
+      clip: {fileID: 8300000, guid: 70097cc789d33aa45840bebc6d56da77, type: 3}
+    - label: bowl
+      clip: {fileID: 8300000, guid: a04b84947075b1644a3d58afa7f1d261, type: 3}
+    - label: banana
+      clip: {fileID: 8300000, guid: b9a0f840bd69e4f45b0ce72d2250f5f8, type: 3}
+    - label: apple
+      clip: {fileID: 8300000, guid: a82cd7f581deb3945a83ca5dd82ee309, type: 3}
+    - label: sandwich
+      clip: {fileID: 8300000, guid: d71e33290fa0dcc4995f1af411aa7e3e, type: 3}
+    - label: orange
+      clip: {fileID: 8300000, guid: ebd6dbd7664e0c640a6824b9842afaec, type: 3}
+    - label: broccoli
+      clip: {fileID: 8300000, guid: 2f5cf5ab9996984468fc2572d0013cd1, type: 3}
+    - label: carrot
+      clip: {fileID: 8300000, guid: 44ddb58a81951bc4698bb75f9f64e7fd, type: 3}
+    - label: hot dog
+      clip: {fileID: 8300000, guid: c7af42bd52ca91648a9afa70a6b87837, type: 3}
+    - label: pizza
+      clip: {fileID: 8300000, guid: 640c70ea86994f2459d6276fce1c8f1d, type: 3}
+    - label: donut
+      clip: {fileID: 8300000, guid: 441cd676b49023343a71b90e0f43fb48, type: 3}
+    - label: cake
+      clip: {fileID: 8300000, guid: fa40f758fce520d4a85487f636d2a6db, type: 3}
+    - label: chair
+      clip: {fileID: 8300000, guid: 855e389e1dfbb6a4f8901a198a0d5d20, type: 3}
+    - label: couch
+      clip: {fileID: 8300000, guid: 2f4a119c0db6dae4c9b43038e38d3b35, type: 3}
+    - label: potted plant
+      clip: {fileID: 8300000, guid: 69ee59a9f79cc70479987a791bfa9c1c, type: 3}
+    - label: bed
+      clip: {fileID: 8300000, guid: 38f2cabab0e4d044885b4479c0e0594d, type: 3}
+    - label: dining table
+      clip: {fileID: 8300000, guid: 2681a0740e4317a409231622d368b16d, type: 3}
+    - label: toilet
+      clip: {fileID: 8300000, guid: dd638343f59a73f429b03c52e36fb5d4, type: 3}
+    - label: tv
+      clip: {fileID: 8300000, guid: ac8cc3841b174574a8885c118941dc49, type: 3}
+    - label: laptop
+      clip: {fileID: 8300000, guid: 6a90a56726f7bf24183d415614445ce6, type: 3}
+    - label: mouse
+      clip: {fileID: 8300000, guid: 768951aa9bf92904084e0d524008106e, type: 3}
+    - label: remote
+      clip: {fileID: 8300000, guid: 817704db02ed5714da5a274ee1d8ac8a, type: 3}
+    - label: keyboard
+      clip: {fileID: 8300000, guid: fc3f00468c5127840b52cc7f7878357f, type: 3}
+    - label: cell phone
+      clip: {fileID: 8300000, guid: 3c6afef3834bef8468515b944fa6b4e4, type: 3}
+    - label: microwave
+      clip: {fileID: 8300000, guid: 3143f5fb94047f840a3123a5909e6c22, type: 3}
+    - label: oven
+      clip: {fileID: 8300000, guid: 0fb7a90856bfa37488e2a09bdff361f3, type: 3}
+    - label: toaster
+      clip: {fileID: 8300000, guid: 9cfcd3d410911db43bb9d1fd9e7d3275, type: 3}
+    - label: sink
+      clip: {fileID: 8300000, guid: f3db4ec7451f2a247bee1f2a15c24516, type: 3}
+    - label: refrigerator
+      clip: {fileID: 8300000, guid: 98ab6095dc6b44a4391830c8c94d2274, type: 3}
+    - label: book
+      clip: {fileID: 8300000, guid: ae0cc920fef95204aac9982fc9b7f0e8, type: 3}
+    - label: clock
+      clip: {fileID: 8300000, guid: 40287e018a787e44ba6922719620ef43, type: 3}
+    - label: vase
+      clip: {fileID: 8300000, guid: 1d6356031bc4c614886c54f14e01aa5b, type: 3}
+    - label: scissors
+      clip: {fileID: 8300000, guid: 2444c025a5022f148a86bdc6c08e9463, type: 3}
+    - label: teddy bear
+      clip: {fileID: 8300000, guid: a9d8dc6c284098d4eb92223d133d78b3, type: 3}
+    - label: hair drier
+      clip: {fileID: 8300000, guid: bac92332612e96a4e950480572968152, type: 3}
+    - label: toothbrush
+      clip: {fileID: 8300000, guid: d046291dfe9780a469913acdbb135d41, type: 3}
+  folderPath: Audio/Label
+  colorMapFile: {fileID: 4900000, guid: 5cb27fcd431046e42bf360c9c70a3041, type: 3}

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7dac5e975fee452286cde9b503efd43b, type: 3}
+  m_Name: NumberObject
+  m_EditorClassIdentifier: 
+  labelClipList:
+    items:
+    - label: 0
+      clip: {fileID: 8300000, guid: 0dec4c64dfed35f498ed7175665509a3, type: 3}
+    - label: 1
+      clip: {fileID: 8300000, guid: 363a7833fc931a74bbe7ebb732f7df0e, type: 3}
+    - label: 2
+      clip: {fileID: 8300000, guid: c811fdd0c11adbe469e30db327e71ba6, type: 3}
+    - label: 3
+      clip: {fileID: 8300000, guid: b235aa61c4e907443b4e34d7a03663de, type: 3}
+    - label: 4
+      clip: {fileID: 8300000, guid: bada4d94a6c1ed648874027e02ca4f1f, type: 3}
+    - label: 5
+      clip: {fileID: 8300000, guid: e255685cc1eb1cd4fb5a3dfd2a49f0d9, type: 3}
+    - label: 6
+      clip: {fileID: 8300000, guid: f61e945b7a388e748bb71bbaad2f5446, type: 3}
+    - label: 7
+      clip: {fileID: 8300000, guid: b849fffc08112c94d8b5564552809071, type: 3}
+    - label: 8
+      clip: {fileID: 8300000, guid: 2efc5b056c3ae6b43b402cb0c075f3ec, type: 3}
+    - label: 9
+      clip: {fileID: 8300000, guid: db589e42c57bd164486bdf13a8bce45a, type: 3}
+    - label: 10
+      clip: {fileID: 8300000, guid: d5535b15c97a0514fa3e704a30594008, type: 3}
+    - label: 11
+      clip: {fileID: 8300000, guid: 6f940b0366ba91945a9004d715416b9a, type: 3}
+    - label: 12
+      clip: {fileID: 8300000, guid: bf2c995a2183c704387fd65a7769454e, type: 3}
+    - label: 13
+      clip: {fileID: 8300000, guid: a6b63142cfa33a64d891550be91cc5b2, type: 3}
+    - label: 14
+      clip: {fileID: 8300000, guid: b75ef118da0de7d498be66217ad81791, type: 3}
+    - label: 15
+      clip: {fileID: 8300000, guid: 997244314ca88b44b88772f1ca2e5c1b, type: 3}
+    - label: 16
+      clip: {fileID: 8300000, guid: 071edc501eda86c4cbe8a4e7f787b823, type: 3}
+    - label: 17
+      clip: {fileID: 8300000, guid: caf97bb75eecd6e4b82a1aabdce1fda6, type: 3}
+    - label: 18
+      clip: {fileID: 8300000, guid: 8c58da8481d26aa43a9dd9a83b7f41ff, type: 3}
+    - label: 19
+      clip: {fileID: 8300000, guid: 000f5ac961b4af347bcb4e498aff35f2, type: 3}
+    - label: 20
+      clip: {fileID: 8300000, guid: 6a46459ec575e7a41896c41684cd1cf8, type: 3}
+    - label: 21
+      clip: {fileID: 8300000, guid: 4e543ff4c3c24cd438c5d08c539114ab, type: 3}
+    - label: 22
+      clip: {fileID: 8300000, guid: 196a5994af7bc534abe378ffde7ca3be, type: 3}
+    - label: 23
+      clip: {fileID: 8300000, guid: e2507bc44653c39409b9910a1ba48451, type: 3}
+    - label: 24
+      clip: {fileID: 8300000, guid: 1d097bede643a884abf163a8f6c67f5d, type: 3}
+    - label: 25
+      clip: {fileID: 8300000, guid: 4175e8c4e8d757048abad1662b3beb0d, type: 3}
+    - label: 26
+      clip: {fileID: 8300000, guid: ef2ac515f49d05c45bb836a9bf65414f, type: 3}
+    - label: 27
+      clip: {fileID: 8300000, guid: d68f2b505c8b54e4eb7a27a4d36e110b, type: 3}
+    - label: 28
+      clip: {fileID: 8300000, guid: dd7dca1a05b450e4ea3b30944e14b87f, type: 3}
+    - label: 29
+      clip: {fileID: 8300000, guid: 7bed2a3d0d5002144b3b88e4cc7fb38a, type: 3}
+    - label: 30
+      clip: {fileID: 8300000, guid: 3ff7ec47bac000f45b1b9068dc2cc085, type: 3}
+  folderPath: Audio\Number

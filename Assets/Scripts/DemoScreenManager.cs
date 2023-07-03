@@ -5,20 +5,19 @@ using System;
 
 public class DemoScreenManager : BaseScreenManager
 {
-    
-
     // Called when the script instance is being loaded.
     private void Start()
     {
         Initialize();
         UpdateDisplay();
         InitializeDropdown();
+        cameraObject.transform.position = new Vector3(0, 0, -10);
+        screenObject.transform.position = new Vector3(0, 0, 11);
     }
 
     // Initialize the GUI dropdown list
     private void InitializeDropdown()
     {
-
         GetWebcamNames();
         UpdateWebcamDeviceSelection();
     }

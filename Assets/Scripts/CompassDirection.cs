@@ -7,9 +7,13 @@ public class CompassDirection : MonoBehaviour
 {
     public TextMeshProUGUI text;
     public RectTransform compassImage;
+    public Transform camera;
+    private bool isTextNotNull;
+    public float trueHeading;
 
     void Start()
-    { 
+    {
+        isTextNotNull = text != null;
         Input.compass.enabled = true;
         Input.location.Start();
         StartCoroutine(UpdateCompass());
@@ -19,11 +23,12 @@ public class CompassDirection : MonoBehaviour
     {
         while (true)
         {
-            float heading = Input.compass.trueHeading;
+            trueHeading = Input.compass.trueHeading;
             // Calculate the direction based on the heading
-            string direction = GetDirection(heading);
-            compassImage.DORotate(new Vector3(0, 0, heading), .1f);
-            text.text = direction;
+            string direction = GetDirection(trueHeading);
+            compassImage.DORotate(new Vector3(0, 0, trueHeading), .1f);
+            camera.DORotate(new Vector3(0, trueHeading, 0), .1f);
+            if (isTextNotNull) text.text = direction;
             yield return new WaitForSeconds(.1f);
         }
     }

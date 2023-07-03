@@ -1,37 +1,44 @@
+using Audio;
 using UnityEngine;
 using CJM.BBox2DToolkit;
 using CJM.DeepLearningImageProcessor;
 using CJM.BarracudaInference.YOLOX;
+using TMPro;
 
 public class InferenceController : MonoBehaviour
 {
     #region Fields
 
     // Components
-    [Header("Components")]
-    [SerializeField, Tooltip("Responsible for image preprocessing")]
+    [Header("Components")] [SerializeField, Tooltip("Responsible for image preprocessing")]
     private ImageProcessor imageProcessor;
+
     [SerializeField, Tooltip("Executes YOLOX model for object detection")]
     private YOLOXObjectDetector modelRunner;
+
     [SerializeField, Tooltip("Manages user interface updates")]
     private UIController uiController;
+
     [SerializeField, Tooltip("Visualizes detected object bounding boxes")]
     private BoundingBox2DVisualizer boundingBoxVisualizer;
+
     [SerializeField, Tooltip("Renders the input image on a screen")]
     private MeshRenderer screenRenderer;
 
-    [Header("Data Processing")]
-    [Tooltip("The target dimensions for the processed image")]
-    [SerializeField] private int targetDim = 224;
-    [Tooltip("Flag to use compute shaders for processing input images.")]
-    [SerializeField] private bool useComputeShaders = false;
+    [Header("Data Processing")] [Tooltip("The target dimensions for the processed image")] [SerializeField]
+    private int targetDim = 224;
+
+    [Tooltip("Flag to use compute shaders for processing input images.")] [SerializeField]
+    private bool useComputeShaders = false;
 
     // Output processing settings
     [Header("Output Processing")]
     [SerializeField, Tooltip("Flag to enable/disable async GPU readback for model output")]
     private bool useAsyncGPUReadback = false;
+
     [SerializeField, Tooltip("Minimum confidence score for an object proposal to be considered"), Range(0, 1)]
     private float confidenceThreshold = 0.5f;
+
     [SerializeField, Tooltip("Threshold for Non-Maximum Suppression (NMS)"), Range(0, 1)]
     private float nmsThreshold = 0.45f;
 
@@ -40,6 +47,10 @@ public class InferenceController : MonoBehaviour
     private bool mirrorScreen = false; // Flag to check if the screen is mirrored
     private Vector2Int offset; // Offset used when cropping the input image
 
+    public TextMeshProUGUI objectLabel;
+
+    public AudioSourcePool audioSourcePool;
+    public CompassDirection compassDirection;
 
     #endregion
 
@@ -48,13 +59,17 @@ public class InferenceController : MonoBehaviour
     /// <summary>
     /// Update the InferenceController every frame, processing the input image and updating the UI and bounding boxes.
     /// </summary>
-    private void Update()
+    public void GetNextFrame()
     {
         // Check if all required components are valid
         if (!AreComponentsValid()) return;
 
         // Get the input image and dimensions
         var imageTexture = screenRenderer.material.mainTexture;
+        float width = imageTexture.width;
+        float height = imageTexture.height;
+        Debug.Log($"imageTexture width: {imageTexture.width}, height: {imageTexture.height}");
+
         var imageDims = new Vector2Int(imageTexture.width, imageTexture.height);
         var inputDims = imageProcessor.CalculateInputDims(imageDims, targetDim);
 
@@ -72,11 +87,18 @@ public class InferenceController : MonoBehaviour
 
         // Update bounding boxes and user interface
         UpdateBoundingBoxes(inputDims);
+
+        objectLabel.text = "Objects Detected:\n";
         //print bboxInfoArray data
-        foreach (BBox2DInfo bboxInfo in bboxInfoArray)
+        for (var i = 0; i < bboxInfoArray.Length; i++)
         {
-            Debug.Log($"x: {bboxInfo.bbox.x0}, y: {bboxInfo.bbox.y0}, width: {bboxInfo.bbox.width}, height: {bboxInfo.bbox.height} name:{bboxInfo.label}");
+            var bboxInfo = bboxInfoArray[i];
+            audioSourcePool.Get(bboxInfo.label, 4, compassDirection.trueHeading, bboxInfo.bbox.x0, bboxInfo.bbox.y0,
+                width, height);
+            objectLabel.text +=
+                $"name: {bboxInfo.label}\tx: {(int)bboxInfo.bbox.x0}, y: {(int)bboxInfo.bbox.y0}, dimension: {(int)bboxInfo.bbox.width}x {(int)bboxInfo.bbox.height} \n";
         }
+
         uiController.UpdateUI(bboxInfoArray.Length);
         boundingBoxVisualizer.UpdateBoundingBoxVisualizations(bboxInfoArray);
     }
@@ -96,6 +118,7 @@ public class InferenceController : MonoBehaviour
             Debug.LogError("InferenceController requires ImageProcessor, ModelRunner, and InferenceUI components.");
             return false;
         }
+
         return true;
     }
 
@@ -116,13 +139,15 @@ public class InferenceController : MonoBehaviour
     /// <param name="imageTexture">The source image texture</param>
     /// <param name="sourceDims">The source image dimensions</param>
     /// <param name="inputDims">The input dimensions for processing</param>
-    private void ProcessInputImage(RenderTexture inputTexture, Texture imageTexture, Vector2Int sourceDims, Vector2Int inputDims)
+    private void ProcessInputImage(RenderTexture inputTexture, Texture imageTexture, Vector2Int sourceDims,
+        Vector2Int inputDims)
     {
         // Calculate the offset for cropping the input image
         offset = (sourceDims - inputDims) / 2;
 
         // Create a temporary render texture to store the cropped image
-        RenderTexture sourceTexture = RenderTexture.GetTemporary(sourceDims.x, sourceDims.y, 0, RenderTextureFormat.ARGBHalf);
+        RenderTexture sourceTexture =
+            RenderTexture.GetTemporary(sourceDims.x, sourceDims.y, 0, RenderTextureFormat.ARGBHalf);
         Graphics.Blit(imageTexture, sourceTexture);
 
         // Crop and normalize the input image using Compute Shaders or fallback to Shader processing
@@ -147,7 +172,8 @@ public class InferenceController : MonoBehaviour
     /// <param name="inputTexture">The input RenderTexture to process</param>
     /// <param name="sourceDims">The source image dimensions</param>
     /// <param name="inputDims">The input dimensions for processing</param>
-    private void ProcessImageShader(RenderTexture sourceTexture, RenderTexture inputTexture, Vector2Int sourceDims, Vector2Int inputDims)
+    private void ProcessImageShader(RenderTexture sourceTexture, RenderTexture inputTexture, Vector2Int sourceDims,
+        Vector2Int inputDims)
     {
         // Calculate the scaled offset and size for cropping the input image
         Vector2 scaledOffset = offset / (Vector2)sourceDims;
@@ -200,10 +226,10 @@ public class InferenceController : MonoBehaviour
         // Scale and position the bounding boxes based on the input and screen dimensions
         for (int i = 0; i < bboxInfoArray.Length; i++)
         {
-            bboxInfoArray[i].bbox = BBox2DUtility.ScaleBoundingBox(bboxInfoArray[i].bbox, inputDims, screenDims, offset, mirrorScreen);
+            bboxInfoArray[i].bbox =
+                BBox2DUtility.ScaleBoundingBox(bboxInfoArray[i].bbox, inputDims, screenDims, offset, mirrorScreen);
         }
     }
-
 
     #endregion
 
