@@ -15,6 +15,11 @@ public class TouchRightSide : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width * 0.5f)
+        {
+            onTouchRightSide.Invoke();
+        }
+        
         if (Time.time < interval)
         {
             return;
@@ -27,10 +32,6 @@ public class TouchRightSide : MonoBehaviour
             {
                 onTouchRightSide.Invoke();
             }
-        }
-        else if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width * 0.5f)
-        {
-            onTouchRightSide.Invoke();
         }
         
         interval = Time.time + delay;
