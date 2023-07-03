@@ -75,8 +75,8 @@ namespace Audio
 
                 yield return new WaitForSeconds(audioSource.clip.length - endCutoff);
             }
-            yield return null;
             End();
+            yield return null;
         }
 
         private void End()

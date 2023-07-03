@@ -470,19 +470,6 @@ MonoBehaviour:
   onTouchRightSide:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1498502500}
-        m_TargetAssemblyTypeName: BrunoMikoski.AnimationsSequencer.AnimationSequence,
-          BrunoMikoski.AnimationSequencer
-        m_MethodName: ResetToInitialState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 2132180761}
         m_TargetAssemblyTypeName: InferenceController, Assembly-CSharp
         m_MethodName: GetNextFrame
@@ -1642,10 +1629,10 @@ MonoBehaviour:
     - rid: 2128944838842777648
       type: {class: TweenStep, ns: BrunoMikoski.AnimationsSequencer, asm: BrunoMikoski.AnimationSequencer}
       data:
-        delay: 0
+        delay: 0.5
         flowType: 0
         target: {fileID: 1498502496}
-        duration: 0.4
+        duration: 1
         actions:
         - rid: 2128944838842777651
         loopCount: 0
