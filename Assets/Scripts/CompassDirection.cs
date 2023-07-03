@@ -27,7 +27,7 @@ public class CompassDirection : MonoBehaviour
             // Calculate the direction based on the heading
             string direction = GetDirection(trueHeading);
             compassImage.DORotate(new Vector3(0, 0, trueHeading), .1f);
-            camera.DORotate(new Vector3(0, trueHeading, 0), .1f);
+            if (camera != null) camera.DORotate(new Vector3(0, trueHeading, 0), .1f);
             if (isTextNotNull) text.text = direction;
             yield return new WaitForSeconds(.1f);
         }

@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using Objects.Classes;
 using TriInspector;
 using UnityEngine;
-using UnityEngine.Pool;
 
 namespace Audio
 {
@@ -12,11 +12,18 @@ namespace Audio
         public AudioSource audioSource;
         public AudioGroup[] audioGroups;
 
-        [Group("vars")] public int currentIndex;
-        [Group("vars")] public int nextIndex;
-        [Group("vars")] public int length;
-
+        [Group("vars")]
+        public int currentIndex;
+        [Group("vars")]
+        public int nextIndex;
+        [Group("vars")]
+        public int length;
+        
+        public float endCutoff = 0.8f;
+        
         public List<AudioClip> audioClips;
+
+        private Coroutine playCoroutine;
 
         [Button]
         public void Play(string text, Vector3 position)
@@ -48,24 +55,28 @@ namespace Audio
                 gameObject.SetActive(true);
             }
 
-            audioSource.Play();
+            if (playCoroutine != null)
+            {
+                StopCoroutine(playCoroutine);
+            }
+
+            playCoroutine = StartCoroutine(PlayAudioCoroutine());
         }
 
-        public void Update()
+        private IEnumerator PlayAudioCoroutine()
         {
-            if (!audioSource.isPlaying)
+            nextIndex = 0;
+
+            while (nextIndex < audioClips.Count)
             {
-                if (nextIndex < audioClips.Count)
-                {
-                    currentIndex = nextIndex++;
-                    audioSource.clip = audioClips[currentIndex];
-                    audioSource.Play();
-                }
-                else
-                {
-                    gameObject.SetActive(false);
-                }
+                currentIndex = nextIndex++;
+                audioSource.clip = audioClips[currentIndex];
+                audioSource.Play();
+
+                yield return new WaitForSeconds(audioSource.clip.length - endCutoff);
             }
+            yield return null;
+            End();
         }
 
         private void End()

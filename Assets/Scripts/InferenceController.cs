@@ -61,14 +61,12 @@ public class InferenceController : MonoBehaviour
     /// </summary>
     public void GetNextFrame()
     {
+        float trueHeading = compassDirection.trueHeading;
         // Check if all required components are valid
         if (!AreComponentsValid()) return;
 
         // Get the input image and dimensions
         var imageTexture = screenRenderer.material.mainTexture;
-        float width = imageTexture.width;
-        float height = imageTexture.height;
-        Debug.Log($"imageTexture width: {imageTexture.width}, height: {imageTexture.height}");
 
         var imageDims = new Vector2Int(imageTexture.width, imageTexture.height);
         var inputDims = imageProcessor.CalculateInputDims(imageDims, targetDim);
@@ -85,16 +83,22 @@ public class InferenceController : MonoBehaviour
         float[] outputArray = GetModelOutput(inputTexture, useAsyncGPUReadback);
         bboxInfoArray = modelRunner.ProcessOutput(outputArray, confidenceThreshold, nmsThreshold);
 
+
         // Update bounding boxes and user interface
-        UpdateBoundingBoxes(inputDims);
+        if (boundingBoxVisualizer.isActiveAndEnabled)
+        {
+            UpdateBoundingBoxes(inputDims);
+        }
+
 
         objectLabel.text = "Objects Detected:\n";
+
+        audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 4, trueHeading, Screen.width,
+            Screen.height, true);
+
         //print bboxInfoArray data
-        for (var i = 0; i < bboxInfoArray.Length; i++)
+        foreach (var bboxInfo in bboxInfoArray)
         {
-            var bboxInfo = bboxInfoArray[i];
-            audioSourcePool.Get(bboxInfo.label, 4, compassDirection.trueHeading, bboxInfo.bbox.x0, bboxInfo.bbox.y0,
-                width, height);
             objectLabel.text +=
                 $"name: {bboxInfo.label}\tx: {(int)bboxInfo.bbox.x0}, y: {(int)bboxInfo.bbox.y0}, dimension: {(int)bboxInfo.bbox.width}x {(int)bboxInfo.bbox.height} \n";
         }
@@ -227,7 +231,7 @@ public class InferenceController : MonoBehaviour
         for (int i = 0; i < bboxInfoArray.Length; i++)
         {
             bboxInfoArray[i].bbox =
-                BBox2DUtility.ScaleBoundingBox(bboxInfoArray[i].bbox, inputDims, screenDims, offset, mirrorScreen);
+                BBox2DUtility.ScaleBoundingBox(bboxInfoArray[i].bbox, inputDims, screenDims, offset, false);
         }
     }
 

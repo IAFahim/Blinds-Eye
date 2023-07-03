@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 0
   m_Name: AudioGroup
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2529126984123791824
 AudioSource:
@@ -149,6 +149,7 @@ MonoBehaviour:
   currentIndex: 0
   nextIndex: 0
   length: 0
+  endCutoff: 0.8
   audioClips:
   - {fileID: 8300000, guid: 138299f3d1fa206429e575c07e9df5b3, type: 3}
   - {fileID: 8300000, guid: a44522d151a84ea449b7c8a827e052eb, type: 3}

@@ -5,16 +5,17 @@ using TMPro;
 
 public class UIController : MonoBehaviour
 {
-    [Header("UI Components")]
-    [SerializeField] private TextMeshProUGUI objectsDetectedText;
+    [Header("UI Components")] [SerializeField]
+    private TextMeshProUGUI objectsDetectedText;
+
     [SerializeField] private TextMeshProUGUI fpsText;
 
-    [Header("Settings")]
-    
-    [SerializeField, Tooltip("Option to display number of objects detected")]
+    [Header("Settings")] [SerializeField, Tooltip("Option to display number of objects detected")]
     public bool displayObjectCount = true;
+
     [SerializeField, Tooltip("Option to display fps")]
     private bool displayFPS = true;
+
     [SerializeField, Tooltip("Time in seconds between refreshing fps value"), Range(0.01f, 1.0f)]
     private float fpsRefreshRate = 0.1f;
 
@@ -39,7 +40,14 @@ public class UIController : MonoBehaviour
         if (displayObjectCount)
         {
             objectsDetectedText.gameObject.SetActive(true);
-            objectsDetectedText.text = $"Count: {objectCount}";
+            if (objectCount > 0)
+            {
+                objectsDetectedText.text = objectCount.ToString();
+            }
+            else
+            {
+                objectsDetectedText.text = "";
+            }
         }
         else
         {
