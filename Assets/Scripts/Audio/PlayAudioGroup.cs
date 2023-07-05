@@ -11,6 +11,9 @@ namespace Audio
     {
         public AudioSource audioSource;
         public AudioGroup[] audioGroups;
+        public int languageIndex = 0;
+        
+        public float cutOff=0.8f;
 
         [Group("vars")]
         public int currentIndex;
@@ -19,7 +22,6 @@ namespace Audio
         [Group("vars")]
         public int length;
         
-        public float endCutoff = 0.8f;
         
         public List<AudioClip> audioClips;
 
@@ -73,7 +75,7 @@ namespace Audio
                 audioSource.clip = audioClips[currentIndex];
                 audioSource.Play();
 
-                yield return new WaitForSeconds(audioSource.clip.length - endCutoff);
+                yield return new WaitForSeconds(audioSource.clip.length - audioGroups[0].cutoff);
             }
             End();
             yield return null;

@@ -93,8 +93,9 @@ public class InferenceController : MonoBehaviour
 
         objectLabel.text = "Objects Detected:\n";
 
-        audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 4, trueHeading, Screen.width,
+        audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 2, trueHeading, Screen.width,
             Screen.height, true);
+        Debug.Log($"Screen width: {Screen.width}, Screen height: {Screen.height}");
 
         //print bboxInfoArray data
         foreach (var bboxInfo in bboxInfoArray)

@@ -9,6 +9,7 @@ namespace Objects.Classes
 
         public string folderPath = "Audio/";
         public readonly Dictionary<string, AudioClip> LabelClipDictionary = new();
+        public float cutoff=0.8f;
         
         protected AudioClip LoadSingleClip(string label)
         {

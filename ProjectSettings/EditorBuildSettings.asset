@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Compass test.unity
+    path: Assets/Scenes/Compass.unity
     guid: 8dd5be79f7c85bd46a317e50a443354f
   m_configObjects: {}
