@@ -51,7 +51,7 @@ MonoBehaviour:
     - label: horse
       clip: {fileID: 8300000, guid: 52e8304360c699347a5010f816cf8a22, type: 3}
     - label: sheep
-      clip: {fileID: 0}
+      clip: {fileID: 8300000, guid: 94347f53de3caf447b33f5dd86b8c35d, type: 3}
     - label: cow
       clip: {fileID: 8300000, guid: fdac1f3466fd4f44d8c1d18f41d94b14, type: 3}
     - label: elephant
@@ -175,5 +175,5 @@ MonoBehaviour:
     - label: toothbrush
       clip: {fileID: 8300000, guid: d1f54455311ac534dbfdeee87afee04f, type: 3}
   folderPath: Audio/Label Bangla
-  cutoff: 0.8
+  cutoff: 0.4
   colorMapFile: {fileID: 4900000, guid: 5cb27fcd431046e42bf360c9c70a3041, type: 3}

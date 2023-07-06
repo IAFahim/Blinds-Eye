@@ -16,15 +16,18 @@ public class TouchRightSide : MonoBehaviour
 
     private void Update()
     {
+        
+
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width * 0.5f)
+        {
+            onTouchRightSide?.Invoke();
+        }
+        
+        if(AudioSourcePool.busy) return;
+        
         if (Time.time < interval)
         {
             return;
-        }
-        if(AudioSourcePool.busy) return;
-
-        if (Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width * 0.5f)
-        {
-            onTouchRightSide?.Invoke();
         }
         
         if (Input.touchCount > 0)

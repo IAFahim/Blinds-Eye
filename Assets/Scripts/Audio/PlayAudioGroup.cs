@@ -80,7 +80,7 @@ namespace Audio
                 audioSource.clip = audioClips[currentIndex];
                 audioSource.Play();
 
-                yield return new WaitForSeconds(audioSource.clip.length - audioGroupsEnglish[0].cutoff);
+                yield return new WaitForSeconds(audioSource.clip.length - audioGroups[currentIndex].cutoff);
             }
 
             End();
