@@ -69,7 +69,7 @@ public class InferenceController : MonoBehaviour
         float trueHeading = compassDirection.trueHeading;
         // Check if all required components are valid
         if (!AreComponentsValid()) return;
-        Handheld.Vibrate();
+        
 
         // Get the input image and dimensions
         var imageTexture = screenRenderer.material.mainTexture;
@@ -103,7 +103,10 @@ public class InferenceController : MonoBehaviour
         leftLabel.text = "";
         middleLabel.text = "";
         rightLabel.text = "";
-
+        if (bboxInfoArray.Length > 0)
+        {
+            Handheld.Vibrate();
+        }
         foreach (var bboxInfo in bboxInfoArray)
         {
             var ratio = bboxInfo.bbox.x0 / Screen.width;

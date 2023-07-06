@@ -22,7 +22,7 @@ public class TouchRightSide : MonoBehaviour
         }
         if(AudioSourcePool.busy) return;
 
-        if (Input.mousePosition.x > Screen.width * 0.5f)
+        if (Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width * 0.5f)
         {
             onTouchRightSide?.Invoke();
         }
