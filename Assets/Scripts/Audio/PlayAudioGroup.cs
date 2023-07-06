@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Objects.Classes;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Audio
 {
@@ -11,18 +12,15 @@ namespace Audio
     {
         public AudioSource audioSource;
         public AudioGroup[] audioGroups;
-        public int languageIndex = 0;
-        
-        public float cutOff=0.8f;
+        public AudioGroup[] audioGroupsEnglish;
+        public AudioGroup[] audioGroupsBangla;
 
-        [Group("vars")]
-        public int currentIndex;
-        [Group("vars")]
-        public int nextIndex;
-        [Group("vars")]
-        public int length;
-        
-        
+        [Group("vars")] public int currentIndex;
+        [Group("vars")] public int nextIndex;
+
+        public float length;
+
+
         public List<AudioClip> audioClips;
 
         private Coroutine playCoroutine;
@@ -32,7 +30,6 @@ namespace Audio
         {
             if (string.IsNullOrEmpty(text))
             {
-                length = 0;
                 return;
             }
 
@@ -42,12 +39,20 @@ namespace Audio
 
             foreach (var word in words)
             {
+                audioGroups = audioGroupsEnglish;
+
+                if (AudioSourcePool.languageIndex == 1)
+                {
+                    audioGroups = audioGroupsBangla;
+                }
+
                 foreach (var audioGroup in audioGroups)
                 {
                     audioGroup.LabelClipDictionary.TryGetValue(word, out AudioClip clip);
                     if (clip != null)
                     {
                         audioClips.Add(clip);
+                        length += clip.length - audioGroup.cutoff;
                     }
                 }
             }
@@ -75,8 +80,9 @@ namespace Audio
                 audioSource.clip = audioClips[currentIndex];
                 audioSource.Play();
 
-                yield return new WaitForSeconds(audioSource.clip.length - audioGroups[0].cutoff);
+                yield return new WaitForSeconds(audioSource.clip.length - audioGroupsEnglish[0].cutoff);
             }
+
             End();
             yield return null;
         }

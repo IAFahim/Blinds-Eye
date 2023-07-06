@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Audio;
 using UnityEngine;
 using CJM.BBox2DToolkit;
@@ -47,10 +48,14 @@ public class InferenceController : MonoBehaviour
     private bool mirrorScreen = false; // Flag to check if the screen is mirrored
     private Vector2Int offset; // Offset used when cropping the input image
 
-    public TextMeshProUGUI objectLabel;
+    public TextMeshProUGUI leftLabel;
+    public TextMeshProUGUI middleLabel;
+    public TextMeshProUGUI rightLabel;
 
     public AudioSourcePool audioSourcePool;
     public CompassDirection compassDirection;
+
+    public bool inverseX = false;
 
     #endregion
 
@@ -64,6 +69,7 @@ public class InferenceController : MonoBehaviour
         float trueHeading = compassDirection.trueHeading;
         // Check if all required components are valid
         if (!AreComponentsValid()) return;
+        Handheld.Vibrate();
 
         // Get the input image and dimensions
         var imageTexture = screenRenderer.material.mainTexture;
@@ -91,17 +97,28 @@ public class InferenceController : MonoBehaviour
         }
 
 
-        objectLabel.text = "Objects Detected:\n";
-
         audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 2, trueHeading, Screen.width,
-            Screen.height, true);
-        Debug.Log($"Screen width: {Screen.width}, Screen height: {Screen.height}");
+            Screen.height, inverseX);
 
-        //print bboxInfoArray data
+        leftLabel.text = "";
+        middleLabel.text = "";
+        rightLabel.text = "";
+
         foreach (var bboxInfo in bboxInfoArray)
         {
-            objectLabel.text +=
-                $"name: {bboxInfo.label}\tx: {(int)bboxInfo.bbox.x0}, y: {(int)bboxInfo.bbox.y0}, dimension: {(int)bboxInfo.bbox.width}x {(int)bboxInfo.bbox.height} \n";
+            var ratio = bboxInfo.bbox.x0 / Screen.width;
+            if (ratio < 0.33f)
+            {
+                leftLabel.text += $"{bboxInfo.label}\n";
+            }
+            else if (ratio < 0.50f)
+            {
+                middleLabel.text += $"{bboxInfo.label}\n";
+            }
+            else
+            {
+                rightLabel.text += $"{bboxInfo.label}\n";
+            }
         }
 
         uiController.UpdateUI(bboxInfoArray.Length);

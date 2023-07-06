@@ -152,10 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6a056a67474468943d853036363853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioGroupObjects:
-  - {fileID: 2927501989622564702, guid: 8bf6ac199fc71d0408203602c2825b24, type: 3}
-  - {fileID: 2927501989622564702, guid: eb54f80d18fdecb41b3647333d87bd34, type: 3}
+  audioGroupObject: {fileID: 2927501989622564702, guid: eb54f80d18fdecb41b3647333d87bd34, type: 3}
   fov: 1.2
+  busy: 0
   dir: {x: 0, y: 0, z: 1}
 --- !u!4 &1563107097
 Transform:

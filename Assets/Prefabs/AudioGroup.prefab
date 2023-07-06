@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2529126984123791824}
   - component: {fileID: 2927501989622564702}
   m_Layer: 0
-  m_Name: EnglishAudioGroup
+  m_Name: AudioGroup
   m_TagString: Untagged
   m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -142,19 +142,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 2529126984123791824}
-  audioGroups:
+  audioGroups: []
+  audioGroupsEnglish:
   - {fileID: 11400000, guid: baea0679de196b640a9f789b1fbc6209, type: 2}
   - {fileID: 11400000, guid: d15b6c106ac97d0478a30c16a41bcee3, type: 2}
   - {fileID: 11400000, guid: 2eef2c33fee7ed84aa3a6cfb3e15d0ba, type: 2}
-  englishAudioGroups:
-  - {fileID: 11400000, guid: baea0679de196b640a9f789b1fbc6209, type: 2}
-  - {fileID: 11400000, guid: d15b6c106ac97d0478a30c16a41bcee3, type: 2}
-  - {fileID: 11400000, guid: 2eef2c33fee7ed84aa3a6cfb3e15d0ba, type: 2}
-  banglaAudioGroups:
+  audioGroupsBangla:
   - {fileID: 11400000, guid: 4f45c71eab1d7a548b9c4408f1d79e14, type: 2}
   - {fileID: 11400000, guid: d15b6c106ac97d0478a30c16a41bcee3, type: 2}
   - {fileID: 11400000, guid: 2eef2c33fee7ed84aa3a6cfb3e15d0ba, type: 2}
-  cutOff: 0.8
   currentIndex: 0
   nextIndex: 0
   length: 0

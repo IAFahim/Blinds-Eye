@@ -1,4 +1,5 @@
 using System;
+using Audio;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,22 +16,23 @@ public class TouchRightSide : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width * 0.5f)
-        {
-            onTouchRightSide.Invoke();
-        }
-        
         if (Time.time < interval)
         {
             return;
         }
+        if(AudioSourcePool.busy) return;
 
+        if (Input.mousePosition.x > Screen.width * 0.5f)
+        {
+            onTouchRightSide?.Invoke();
+        }
+        
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
             if (touch.position.x > Screen.width * 0.5f)
             {
-                onTouchRightSide.Invoke();
+                onTouchRightSide?.Invoke();
             }
         }
         

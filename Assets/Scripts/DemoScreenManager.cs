@@ -12,6 +12,11 @@ public class DemoScreenManager : BaseScreenManager
         InitializeDropdown();
         cameraObject.transform.position = new Vector3(0, 0, 0);
         screenObject.transform.position = new Vector3(0, 0, 0);
+        var vec= screenObject.transform.localScale;
+        vec.z = 1;
+        screenObject.transform.localScale = vec;
+        screenObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+
     }
 
     // Initialize the GUI dropdown list
