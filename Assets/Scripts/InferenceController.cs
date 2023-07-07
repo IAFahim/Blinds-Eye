@@ -5,6 +5,7 @@ using CJM.BBox2DToolkit;
 using CJM.DeepLearningImageProcessor;
 using CJM.BarracudaInference.YOLOX;
 using TMPro;
+using UnityEngine.Serialization;
 
 public class InferenceController : MonoBehaviour
 {
@@ -48,19 +49,25 @@ public class InferenceController : MonoBehaviour
     private bool mirrorScreen = false; // Flag to check if the screen is mirrored
     private Vector2Int offset; // Offset used when cropping the input image
 
-    public TextMeshProUGUI leftLabel;
-    public TextMeshProUGUI middleLabel;
-    public TextMeshProUGUI rightLabel;
 
     public AudioSourcePool audioSourcePool;
     public CompassDirection compassDirection;
 
     public bool inverseX = false;
 
+    public TextMeshProUGUI leftLabel;
+    public TextMeshProUGUI middleLabel;
+    public TextMeshProUGUI rightLabel;
+    public bool vibrationIsActive = true;
     #endregion
 
     #region MonoBehaviour Methods
 
+    public void SetVibration(bool value)
+    {
+        vibrationIsActive = value;
+    }
+    
     /// <summary>
     /// Update the InferenceController every frame, processing the input image and updating the UI and bounding boxes.
     /// </summary>
@@ -69,7 +76,7 @@ public class InferenceController : MonoBehaviour
         float trueHeading = compassDirection.trueHeading;
         // Check if all required components are valid
         if (!AreComponentsValid()) return;
-        
+
 
         // Get the input image and dimensions
         var imageTexture = screenRenderer.material.mainTexture;
@@ -96,25 +103,29 @@ public class InferenceController : MonoBehaviour
             UpdateBoundingBoxes(inputDims);
         }
 
+        uiController.UpdateUI(bboxInfoArray.Length);
+        boundingBoxVisualizer.UpdateBoundingBoxVisualizations(bboxInfoArray);
 
-        audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 2, trueHeading, Screen.width,
-            Screen.height, inverseX);
 
         leftLabel.text = "";
         middleLabel.text = "";
         rightLabel.text = "";
-        if (bboxInfoArray.Length > 0)
+        
+        if (bboxInfoArray.Length > 0 && vibrationIsActive)
         {
             Handheld.Vibrate();
         }
+
+        MoveToCenter(bboxInfoArray);
+
         foreach (var bboxInfo in bboxInfoArray)
         {
             var ratio = bboxInfo.bbox.x0 / Screen.width;
-            if (ratio < 0.33f)
+            if (ratio < 0.4f)
             {
                 leftLabel.text += $"{bboxInfo.label}\n";
             }
-            else if (ratio < 0.50f)
+            else if (ratio < 0.6f)
             {
                 middleLabel.text += $"{bboxInfo.label}\n";
             }
@@ -124,8 +135,18 @@ public class InferenceController : MonoBehaviour
             }
         }
 
-        uiController.UpdateUI(bboxInfoArray.Length);
-        boundingBoxVisualizer.UpdateBoundingBoxVisualizations(bboxInfoArray);
+
+        audioSourcePool.Get(bboxInfoArray, AudioSourcePool.PlaybackMode.Sequential, 2, trueHeading, Screen.width,
+            Screen.height, inverseX);
+    }
+
+    public void MoveToCenter(BBox2DInfo[] bboxInfos)
+    {
+        for (var i = 0; i < bboxInfos.Length; i++)
+        {
+            bboxInfos[i].bbox.x0 = (int)(bboxInfos[i].bbox.x0 + (bboxInfos[i].bbox.width / 2f));
+            bboxInfos[i].bbox.y0 = (int)(bboxInfos[i].bbox.y0 - (bboxInfos[i].bbox.height / 2f));
+        }
     }
 
     #endregion

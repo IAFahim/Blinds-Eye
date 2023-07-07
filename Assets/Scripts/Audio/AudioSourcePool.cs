@@ -14,6 +14,12 @@ namespace Audio
         public static int languageIndex = 0;
         public float fov = 1.2f;
         public static bool busy;
+        private bool shouldPlayDirection = true;
+        
+        public void SetDirection(bool value)
+        {
+            shouldPlayDirection = value;
+        }
 
         public enum PlaybackMode
         {
@@ -25,7 +31,7 @@ namespace Audio
         {
             languageIndex = index;
         }
-        
+
         public UnityEvent onToggleLanguage;
 
         [Button]
@@ -38,7 +44,7 @@ namespace Audio
 
         private void Start()
         {
-            _pool= new ObjectPool<PlayAudioGroup>(() => Instantiate(audioGroupObject),
+            _pool = new ObjectPool<PlayAudioGroup>(() => Instantiate(audioGroupObject),
                 (go) =>
                 {
                     if (go != null) go.gameObject.SetActive(true);
@@ -64,7 +70,6 @@ namespace Audio
         {
             float xRatio = Balence(x, width, inverse) * fov;
             float yRatio = Balence(y, height, false) * fov;
-            Debug.Log($"width: {width}, height: {height}, x: {x}, y: {y}, xRatio: {xRatio}, yRatio: {yRatio}");
             dir = new Vector3(xRatio, yRatio, 1);
             Vector3 position = dir * distance;
             Quaternion targetRotation = Quaternion.Euler(0, degreeZ, 0);
@@ -80,8 +85,14 @@ namespace Audio
                 ratio = -ratio;
             }
 
-            ratio = Mathf.Sqrt(ratio) * (negative ? -1 : 1);
-
+            Debug.Log($"ratio 1: {ratio}");
+            ratio = Mathf.Sqrt(ratio);
+            if (negative)
+            {
+                ratio = -ratio;
+            }
+            Debug.Log($"ratio 2: {ratio}");
+            
             if (inverse)
             {
                 ratio = -ratio;
@@ -111,12 +122,32 @@ namespace Audio
                 case PlaybackMode.Sequential:
                     for (int i = 0; i < length; i++)
                     {
-                        int x = (int)(bbox2DInfos[i].bbox.x0 + (bbox2DInfos[i].bbox.width / 2f));
-                        int y = (int)(bbox2DInfos[i].bbox.y0 - (bbox2DInfos[i].bbox.height / 2f));
                         var bbox2DInfo = bbox2DInfos[i];
                         var audioGroup = _pool.Get();
-                        audioGroup.Play(bbox2DInfo.label,
-                            CalculatePosition(x, y, width, height, 2, 0, inverse));
+                        var ratio = bbox2DInfo.bbox.x0 / Screen.width;
+                        string audioToPlay = "";
+
+                        if (shouldPlayDirection)
+                        {
+                            if (ratio < 0.40f)
+                            {
+                                audioToPlay = "onleft ";
+                            }
+                            else if (ratio < 0.60f)
+                            {
+                                audioToPlay = "onmiddle ";
+                            }
+                            else
+                            {
+                                audioToPlay = "onright ";
+                            }
+                        }
+
+                        audioToPlay += bbox2DInfo.label;
+
+
+                        audioGroup.Play(audioToPlay,
+                            CalculatePosition(bbox2DInfo.bbox.x0, bbox2DInfo.bbox.y0, width, height, 2, 0, inverse));
                         yield return new WaitForSeconds(audioGroup.length);
                     }
 
@@ -138,6 +169,7 @@ namespace Audio
 
                     break;
             }
+
             busy = false;
             yield return null;
         }

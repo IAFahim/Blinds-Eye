@@ -11,7 +11,6 @@ public class SliderController : MonoBehaviour
     private void Start()
     {
         slider.onValueChanged.AddListener(OnValueChanged);
-        
     }
 
     private void OnValueChanged(float value)

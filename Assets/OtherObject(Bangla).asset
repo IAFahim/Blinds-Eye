@@ -10,19 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beac06c25a804f9eb67688225f08dd94, type: 3}
-  m_Name: OtherObject
+  m_Name: OtherObject(Bangla)
   m_EditorClassIdentifier: 
   labelClipList:
     items:
-    - label: degree
-      clip: {fileID: 8300000, guid: 0ba73373417dea7408e05eb89d31ec1b, type: 3}
-    - label: on
-      clip: {fileID: 8300000, guid: a44522d151a84ea449b7c8a827e052eb, type: 3}
     - label: onleft
-      clip: {fileID: 8300000, guid: 7e393d2d955d68347b60785fe9cf1650, type: 3}
+      clip: {fileID: 8300000, guid: 489fc566e5f92d64ab1de5632f3ad81c, type: 3}
     - label: onmiddle
-      clip: {fileID: 8300000, guid: 485f219a17a243e458fac5dac65fec31, type: 3}
+      clip: {fileID: 8300000, guid: 7d5edd0940d1fa443ae3a0a5bb9460a8, type: 3}
     - label: onright
-      clip: {fileID: 8300000, guid: fbca22049ca0cfb40b1d0c542ed0b08e, type: 3}
-  folderPath: Audio/other
+      clip: {fileID: 8300000, guid: 41f819501017b51478f14847419db7ac, type: 3}
+  folderPath: Audio/Other Bangla
   cutoff: 0.5

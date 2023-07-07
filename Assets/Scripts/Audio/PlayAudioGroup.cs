@@ -14,6 +14,7 @@ namespace Audio
         public AudioGroup[] audioGroups;
         public AudioGroup[] audioGroupsEnglish;
         public AudioGroup[] audioGroupsBangla;
+        public float[] cutoffMap;
 
         [Group("vars")] public int currentIndex;
         [Group("vars")] public int nextIndex;
@@ -36,7 +37,7 @@ namespace Audio
             audioClips = new List<AudioClip>();
             transform.position = position;
             string[] words = text.Split(' ');
-
+            cutoffMap = new float[words.Length];
             foreach (var word in words)
             {
                 audioGroups = audioGroupsEnglish;
@@ -51,6 +52,7 @@ namespace Audio
                     audioGroup.LabelClipDictionary.TryGetValue(word, out AudioClip clip);
                     if (clip != null)
                     {
+                        cutoffMap[audioClips.Count] = audioGroup.cutoff;
                         audioClips.Add(clip);
                         length += clip.length - audioGroup.cutoff;
                     }
@@ -79,8 +81,7 @@ namespace Audio
                 currentIndex = nextIndex++;
                 audioSource.clip = audioClips[currentIndex];
                 audioSource.Play();
-
-                yield return new WaitForSeconds(audioSource.clip.length - audioGroups[currentIndex].cutoff);
+                yield return new WaitForSeconds(audioSource.clip.length - cutoffMap[currentIndex]);
             }
 
             End();
@@ -95,6 +96,7 @@ namespace Audio
             audioClips.Clear();
             audioSource.Stop();
             audioSource.clip = null;
+            cutoffMap = null;
             AudioSourcePool.Release(this);
         }
 
